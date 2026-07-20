@@ -1,14 +1,13 @@
 # ===========================================
 # Stage 1: Build frontend
 # ===========================================
-FROM node:20-alpine AS frontend-builder
+FROM node:22-alpine AS frontend-builder
 
 WORKDIR /app/frontend
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install -g pnpm@latest
 
-COPY frontend/package.json frontend/pnpm-lock.yaml frontend/pnpm-workspace.yaml ./
+COPY frontend/package.json frontend/pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prefer-offline
 
 COPY frontend/ .
@@ -24,7 +23,6 @@ COPY backend/ ./backend/
 
 RUN cd backend && CGO_ENABLED=0 go build -o /server .
 
-# Copy frontend dist to backend static
 COPY --from=frontend-builder /app/frontend/dist ./static
 
 # ===========================================
@@ -36,10 +34,7 @@ RUN apk add --no-cache ca-certificates tzdata
 
 WORKDIR /app
 
-# Copy the server binary
 COPY --from=backend-builder /server .
-
-# Copy static files (frontend)
 COPY --from=backend-builder /static ./static
 
 EXPOSE 10000
