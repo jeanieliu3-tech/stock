@@ -1,31 +1,32 @@
-FROM node:22-alpine AS frontend-builder
+ dockerfile
+    FROM node:22-alpine AS frontend-builder
 
-WORKDIR /app/frontend
+    WORKDIR /app/frontend
 
-COPY frontend/package.json frontend/package-lock.json ./
-RUN npm install --ignore-scripts
+    COPY frontend/package.json frontend/package-lock.json ./
+    RUN npm ci --ignore-scripts
 
-COPY frontend/ .
-RUN npm run build
+    COPY frontend/ .
+    RUN npm run build
 
-FROM golang:1.22-alpine AS backend-builder
+    FROM golang:1.22-alpine AS backend-builder
 
-WORKDIR /app
-COPY backend/ ./backend/
+    WORKDIR /app
+    COPY backend/ ./backend/
 
-RUN cd backend && CGO_ENABLED=0 go build -o /server .
+    RUN cd backend && CGO_ENABLED=0 go build -o /server .
 
-COPY --from=frontend-builder /app/frontend/dist ./static
+    COPY --from=frontend-builder /app/frontend/dist ./static
 
-FROM alpine:3.19
+    FROM alpine:3.19
 
-RUN apk add --no-cache ca-certificates tzdata
+    RUN apk add --no-cache ca-certificates tzdata
 
-WORKDIR /app
+    WORKDIR /app
 
-COPY --from=backend-builder /server .
-COPY --from=backend-builder /static ./static
+    COPY --from=backend-builder /server .
+    COPY --from=backend-builder /static ./static
 
-EXPOSE 10000
-ENV PORT=10000
-CMD ["./server"]
+    EXPOSE 10000
+    ENV PORT=10000
+    CMD ["./server"]
