@@ -1,0 +1,11 @@
+node_modules/
+.git/
+.cache/
+*.exe
+*.log
+logs/
+.env
+dist/
+.turbo/
+.cozeproj/
+.coze-logs/

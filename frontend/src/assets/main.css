@@ -1,0 +1,348 @@
+@import 'tailwindcss';
+
+/* ═══════════════════════════════════════
+   有机极简 · 设计系统 v2
+   顶部导航 · 全宽内容 · 现代字体
+   ═══════════════════════════════════════ */
+
+@theme inline {
+  /* 页面基础 */
+  --color-page: #F5F0EB;
+  --color-card: rgba(255, 255, 255, 0.82);
+  --color-card-solid: #FFFFFF;
+  --color-hover: rgba(0, 0, 0, 0.04);
+  --color-glass: rgba(255, 255, 255, 0.55);
+  --color-glass-border: rgba(255, 255, 255, 0.25);
+
+  /* 自然色盘 */
+  --color-earth-sage: #8DB8A0;
+  --color-earth-sage-light: #C8DFD4;
+  --color-earth-terracotta: #D4A59A;
+  --color-earth-terracotta-light: #EBDAD5;
+  --color-earth-clay: #C4A88C;
+  --color-earth-clay-light: #E6D9CE;
+  --color-earth-sky: #A8C5D6;
+  --color-earth-sky-light: #D5E3ED;
+  --color-earth-lavender: #B8A9C9;
+  --color-earth-lavender-light: #DFD6E8;
+
+  /* 涨跌色 */
+  --color-up: #D4837A;
+  --color-up-bg: rgba(212, 131, 122, 0.12);
+  --color-down: #7DB89A;
+  --color-down-bg: rgba(125, 184, 154, 0.12);
+
+  /* 文字 */
+  --color-text-primary: #2C2C2C;
+  --color-text-secondary: #5A5A5A;
+  --color-text-tertiary: #8A8A8A;
+
+  /* 标签色 */
+  --color-tag-blue-bg: #E3EDF5;
+  --color-tag-blue-text: #4A7A9E;
+  --color-tag-red-bg: #F5E3E0;
+  --color-tag-red-text: #A86B62;
+  --color-tag-yellow-bg: #F5EDDF;
+  --color-tag-yellow-text: #A8884A;
+  --color-tag-green-bg: #E3F0EA;
+  --color-tag-green-text: #4A8A6A;
+  --color-tag-purple-bg: #EDE6F2;
+  --color-tag-purple-text: #7A62A0;
+}
+
+/* ─── Reset & Base ─────────────────────── */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #F5F0EB;
+  color: #2C2C2C;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* ─── 数字等宽 ─────────────────────────── */
+
+.num-font {
+  font-family: 'Outfit', 'Inter', 'Roboto Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* ─── 滚动条 ───────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* ─── 玻璃卡片 ─────────────────────────── */
+
+.card {
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    0 8px 32px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.06),
+    0 16px 48px rgba(0, 0, 0, 0.03);
+}
+
+/* ─── 玻璃面板 ─────────────────────────── */
+
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ─── 按钮 ─────────────────────────────── */
+
+.btn {
+  border-radius: 14px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  font-weight: 500;
+  user-select: none;
+}
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: #8DB8A0;
+  color: #FFFFFF;
+}
+.btn-primary:hover {
+  background: #7DA890;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(141, 184, 160, 0.3);
+}
+
+.btn-ghost {
+  background: rgba(0, 0, 0, 0.04);
+  color: #6B6B6B;
+}
+.btn-ghost:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #2C2C2C;
+}
+
+/* ─── 输入框 ───────────────────────────── */
+
+.input-organic {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 14px;
+  padding: 10px 16px;
+  outline: none;
+  color: #2C2C2C;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1.5px solid transparent;
+  font-family: 'Outfit', 'PingFang SC', sans-serif;
+}
+.input-organic::placeholder {
+  color: #9A9A9A;
+}
+.input-organic:focus {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(141, 184, 160, 0.4);
+  box-shadow: 0 0 0 4px rgba(141, 184, 160, 0.08);
+}
+
+/* ─── 标签 ─────────────────────────────── */
+
+.tag-organic {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 100px;
+  font-size: 12px;
+  line-height: 1;
+  padding: 4px 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ─── 弹簧动效（连续交错 + 弹性过冲） ─── */
+
+.spring-up {
+  animation: springUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes springUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-1.5px) scale(1.003);
+  }
+  75% {
+    transform: translateY(0.5px) scale(0.998);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── 呼吸点 ───────────────────────────── */
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+.breathe-dot {
+  animation: breathe 2.5s ease-in-out infinite;
+}
+
+/* ─── 页面过渡 ─────────────────────────── */
+
+.page-enter-active {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.page-leave-active {
+  transition: all 0.25s ease-in;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+}
+
+/* ─── 抽屉过渡 ─────────────────────────── */
+
+.drawer-enter-active {
+  transition: opacity 0.3s ease;
+}
+.drawer-enter-active > div:last-child {
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.drawer-leave-active {
+  transition: opacity 0.2s ease;
+}
+.drawer-leave-active > div:last-child {
+  transition: transform 0.25s ease-in;
+}
+.drawer-enter-from,
+.drawer-leave-to {
+  opacity: 0;
+}
+.drawer-enter-from > div:last-child {
+  transform: translateX(100%);
+}
+.drawer-leave-to > div:last-child {
+  transform: translateX(100%);
+}
+
+/* ─── 趋势图 ───────────────────────────── */
+
+@keyframes draw-sparkline {
+  from { stroke-dashoffset: 500; }
+  to { stroke-dashoffset: 0; }
+}
+.sparkline-path {
+  stroke-dasharray: 500;
+  animation: draw-sparkline 0.8s ease-out forwards;
+}
+
+/* ─── 底部滑出动画 ─────────────────────────── */
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ─── 移动端安全区适配 ─────────────────────── */
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* ─── 骨架屏 ───────────────────────────── */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-shimmer {
+  background: linear-gradient(90deg,
+    rgba(0, 0, 0, 0.04) 25%,
+    rgba(0, 0, 0, 0.06) 50%,
+    rgba(0, 0, 0, 0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ─── 微交互 ───────────────────────────── */
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── 弹窗背景 ─────────────────────────── */
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.15);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* ─── 响应式卡片网格 ───────────────────── */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ─── 顶部导航激活态 ───────────────────── */
+
+.nav-active {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  color: #2C2C2C;
+}

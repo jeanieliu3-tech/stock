@@ -1,0 +1,19 @@
+{
+  "name": "波段趋势共振助手",
+  "short_name": "波段共振",
+  "description": "A股波段趋势分析与扫描工具",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F0EB",
+  "theme_color": "#8DB8A0",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "utilities"]
+}
